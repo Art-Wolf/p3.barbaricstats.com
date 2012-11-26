@@ -36,18 +36,19 @@ class Game_model extends CI_Model
 	{
 		$this->db->escape($data);
 
-		$update = array( 'game.end_time' => 'CURRENT_TIMESTAMP');
-		$this->db->where($data);
+		$update = array( 'game.end_time' => 'CURRENT_TIMESTAMP()');
+		$this->db->where('game.end_time IS NULL and game.userid = ' . $data['game.userid']);
+		$this->db->update('game', $update);
+
+
+		$update = array( 'game.end_time' => NULL);
+		$this->db->where('game.id = ' . $data['game.id'] . ' AND game.userid = ' . $data['game.userid']);
 		$this->db->update('game', $update);
  
-		$this->db->insert('game', $data);
-
-		if ($this->db->affected_rows() == '1')
+		if ($this->db->affected_rows() == '0')
                 {
-                        return TRUE;
+			$this->db->insert('game', $data);
                 }
-
-                return FALSE;
 	}
 
 	function get_latest_game($data)
@@ -75,10 +76,10 @@ class Game_model extends CI_Model
 
 	function staging_games()
 	{
-		$this->db->select('game.id, game.start_time, COUNT(*) cnt');
+		$this->db->select('game.id, COUNT(*) cnt');
 		$this->db->from('game');
 		$this->db->where('game.end_time IS NULL');
-		$this->db->group_by('game.id, game.start_time');
+		$this->db->group_by('game.id');
 
 		return $this->db->get()->result();
 	}

@@ -38,13 +38,15 @@ class Game extends CI_Controller {
                 $this->load->model('game_model');
 
 		$form_data = array ( 'game.id'=> $game_id,
-				'game.end_time' => null,
 				'game.userid' => $this->session->userdata('user_id'));
 
-		$check = $this->game_model->check_game($form_data);
+		$check = 0; // $this->game_model->check_game($form_data);
 
-		if ($check = 0)
+		if ($check == 0)
 		{
+			$form_data = array ( 'game.id'=> $game_id,
+                                'game.end_time' => null,
+                                'game.userid' => $this->session->userdata('user_id'));
                 	$this->game_model->join_game($form_data);
 		}
 

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Bootswatch: Spacelab</title>
+    <title>Speed: Mafia</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -66,8 +66,8 @@
 <header class="jumbotron subhead" id="overview">
   <div class="row">
     <div class="span6">
-      <h1>Spacelab</h1>
-      <p class="lead">A preview of changes in this swatch.</p>
+      <h1>Speed:Mafia</h1>
+      <p class="lead">An old soviet game to stimulate strategic thinking.</p>
     </div>
     <div class="span6">
         <img src="/img/test.gif" />

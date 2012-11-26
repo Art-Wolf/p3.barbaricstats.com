@@ -57,7 +57,9 @@ $game_list = array_reverse($game_list);
 							</tbody>
 						</table>
 					</div>
-					<p class="collapse">Run Time: <?php echo get_time_ago(strtotime($game->start_time)); ?></p>
+					<p class="collapse">Run Time: <?php 
+//echo get_time_ago(strtotime($game->start_time)); 
+?></p>
 					<p><a class="btn btn-success" href="/index.php/game/join/<?php echo $game->id; ?>">Join Game <?php echo $game->id; ?></a><a class="btn btn-info" href="#">More Info (<?php echo $game->cnt; ?>/7)</a></p>
 				</div>
 			</div>
