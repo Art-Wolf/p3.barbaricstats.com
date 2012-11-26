@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Ajax_chat extends CI_Controller {
+class Game extends CI_Controller {
 
 	 public function __construct() {
                 parent::__construct();
@@ -29,28 +29,18 @@ class Ajax_chat extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
-	public function index()
-	{
-		$this->load->helper(array('url'));
-		$this->load->database();
-		$this->load->model('chat_model');
-		$data['chat'] = $this->chat_model->get_latest();
- 
-		$this->load->view('ajax_chat_box', $data);
-	}
-
-	public function submit()
+	public function lobby()
 	{
 		$this->load->helper(array('form','url'));
 		$this->load->database();
 
-		if($this->session->userdata('user_name')) {
-			$data = array (	'chat.username' => $this->session->userdata('user_name'),
-					'chat.message' => set_value('chat-message')
-			);
-		}
-		$this->load->model('chat_model');
-		$this->chat_model->insert($data);
+		$this->load->view('header');
+
+		$this->load->model('game_model');
+		$data['game_list'] = $this->game_model->staging_games();
+
+		$this->load->view('game_lobby', $data);
+		$this->load->view('footer');
 	}
 }
 

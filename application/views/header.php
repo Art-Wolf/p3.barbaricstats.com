@@ -17,20 +17,6 @@
 
     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-	<script type="text/javascript">
-		setInterval(function() {
-				$.ajax({
-					url: "/index.php/ajax_chat",
-					async: false,
-					type: "POST",
-					data: "type=chat",
-					dataType: "html",
-					success: function(data) {
-						$('#chat-input').html(data);
-					}
-				})
-			}, 1000);
-	</script>
   </head>
 
   <body class="preview" data-spy="scroll" data-target=".subnav" data-offset="80">
@@ -49,7 +35,7 @@
        <a class="brand" href="../">Mafia</a>
        <div class="nav-collapse" id="main-menu">
         <ul class="nav" id="main-menu-left">
-          <li><a href="http://news.bootswatch.com">News</a></li>
+          <li><a href="/index.php/game/lobby">Game Lobby</a></li>
           <li><a href="/#allery">Gallery</a></li>
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Preview <b class="caret"></b></a>
@@ -81,8 +67,18 @@
           </li>
         </ul>
         <ul class="nav pull-right" id="main-menu-right">
-          <li><a rel="tooltip" target="_blank" href="http://builtwithbootstrap.com/" title="Showcase of Bootstrap sites &amp; apps">Built With Bootstrap <i class="icon-share-alt"></i></a></li>
-          <li><a rel="tooltip" target="_blank" href="https://wrapbootstrap.com/?ref=bsw" title="Marketplace for premium Bootstrap templates">WrapBootstrap <i class="icon-share-alt"></i></a></li>
+	<?php
+		if (!$this->session->userdata('user_name')) {
+	?>
+          <li><a rel="tooltip" href="/index.php/users/signin" title="Signin to Mafia">Signin <i class="icon-user"></i></a></li>
+          <li><a rel="tooltip" href="/index.php/users/register" title="Register for Mafia">Register <i class="icon-th-large"></i></a></li>
+	<?php
+		} else {
+	?>
+          <li><a rel="tooltip" href="/index.php/users/logout" title="Logout of Mafia">Logout <i class="icon-user"></i></a></li>
+	<?php
+		}
+	?>
         </ul>
        </div>
      </div>
