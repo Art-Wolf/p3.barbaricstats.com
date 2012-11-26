@@ -8,8 +8,8 @@ $attributes = array('class' => '', 'id' => '');
 	</div>
 
 	<div class="row">
-		<div class="span11" id="status">
-			<img src="/img/wait-status.jpg" width="200px">
+		<div class="span11" id="game-state">
+			<img src="/img/nighttime.png" width="600px">
 		</div>
 
 		<div class="span11" id="players">
@@ -73,6 +73,19 @@ $attributes = array('class' => '', 'id' => '');
                                         dataType: "html",
                                         success: function(data) {
                                                 $('#chat-input').html(data);
+                                        }
+                                })
+                        }, 1000);
+
+		setInterval(function() {
+                                $.ajax({
+                                        url: "/index.php/game/get_state",
+                                        async: false,
+                                        type: "POST",
+                                        data: "type=chat",
+                                        dataType: "html",
+                                        success: function(data) {
+                                                $('#game-state').html(data);
                                         }
                                 })
                         }, 1000);
