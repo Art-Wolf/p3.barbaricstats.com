@@ -36,7 +36,13 @@
        <div class="nav-collapse" id="main-menu">
         <ul class="nav" id="main-menu-left">
           <li><a href="/index.php/game/lobby">Game Lobby</a></li>
-          <li><a href="/index.php/game/create">Create Game</a></li>
+          <?php
+		if($this->session->userdata('user_name')) {
+	  ?>
+	  <li><a href="/index.php/game/create">Create Game</a></li>
+	  <?php
+		}
+	   ?>
           <li><a href="/index.php/rules">Game Rules</a></li>
         </ul>
         <ul class="nav pull-right" id="main-menu-right">
