@@ -206,16 +206,42 @@ class Game extends CI_Controller {
                 $this->chat_model->game_insert($data);
         }
 
+	public function mafia_chat_message()
+        {
+                $this->load->helper(array('form','url'));
+                $this->load->database();
+
+                if($this->session->userdata('user_name')) {
+                        $data = array ( 'mafia_chat.game_id'=> $this->session->userdata('game_id'),
+                                        'mafia_chat.username' => $this->session->userdata('user_name'),
+                                        'mafia_chat.message' => set_value('mafia-chat-message')
+                        );
+                }
+                $this->load->model('chat_model');
+                $this->chat_model->game_mafia_insert($data);
+        }
+
 	public function chat()
 	{
 		$this->load->helper(array('url'));
                 $this->load->database();
                 $this->load->model('chat_model');
 		$form_data = array('chat.game_id' => $this->session->userdata('game_id'));
-                $data['chat'] = $this->chat_model->get_game_latest($form_data);
+                $data['chat'] = $this->chat_model->get_public_game_latest($form_data);
 
                 $this->load->view('ajax_chat_box', $data);
 	}
+
+	public function mafia_chat()
+        {
+                $this->load->helper(array('url'));
+                $this->load->database();
+                $this->load->model('chat_model');
+                $form_data = array('mafia_chat.game_id' => $this->session->userdata('game_id'));
+                $data['chat'] = $this->chat_model->get_mafia_game_latest($form_data);
+
+                $this->load->view('ajax_chat_box', $data);
+        }
 
 	public function get_state()
 	{

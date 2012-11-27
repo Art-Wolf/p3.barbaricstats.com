@@ -99,7 +99,7 @@ class Game_model extends CI_Model
 	{
 		$this->db->escape($data);
 
-		$this->db->select('game.userid, users.user_name, users.photo');
+		$this->db->select('game.userid, users.user_name, game.role, users.photo');
 		$this->db->from('game');
 		$this->db->join('users', 'game.userid = users.id');
 		$this->db->where($data);

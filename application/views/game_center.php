@@ -1,6 +1,7 @@
 <?php
 $attributes = array('class' => '', 'id' => '');
 
+$mafia_ind = FALSE;
 ?>
 <section id="forms">
 	<div class="page-header">
@@ -21,6 +22,19 @@ $attributes = array('class' => '', 'id' => '');
 					?>
 					<td id="player-<?php echo $count; ?>">
 						<table class="table">
+
+							<?php
+
+							if($info->user_name == $this->session->userdata('user_name')) 
+							{
+								if($info->role == 1)
+								{
+									$mafia_ind = TRUE;
+								}
+							}
+
+							?>
+ 
 							<tr <?php if($info->user_name == $this->session->userdata('user_name')) { ?>class="success"<?php } ?>><td class="pagination-centered"><img src="/img/user.png" width="60px"></td></tr>
 							<tr <?php if($info->user_name == $this->session->userdata('user_name')) { ?>class="success"<?php } ?>><td class="pagination-centered" <?php if($info->user_name == $this->session->userdata('user_name')) { ?>style="color: white"<?php } ?>><?php echo $info->user_name; ?></td></tr>
 						</table>
@@ -91,6 +105,56 @@ $attributes = array('class' => '', 'id' => '');
                         }, 1000);
         </script>
 		</div>
+
+		<?php
+		if($mafia_ind)
+		{
+		?>
+		
+		<h1>Private Mafia Chat</h1>
+		<div class="span11 mafia-chat-input" id="mafia-chat-input">
+                </div>
+
+
+                <div class="span10 offset1">
+                        <table>
+                                <tr>
+                                        <td><label class="control-label" for="mafia-chat-input"><?php echo $this->session->userdata('user_name'); ?></label></td>
+                                        <td><input type="text" class="input-xxlarge search-query" id="mafia-chat-message"></td>
+                                        <td><button type="submit" class="btn" id="mafia-chat-submit">Mafia Chat</button></td>
+                                </tr>
+                        </table>
+                        <script type="text/javascript">
+                        $('#mafia-chat-submit').click(function() {
+                                $.ajax({
+                                        url: "/index.php/game/mafia_chat_message",
+                                        async: false,
+                                        type: "POST",
+                                        data: "mafia-chat-message=" + $('#mafia-chat-message').val(),
+                                        success: function() {
+                                                $('#mafia-chat-message').val('');
+                                        }
+                                });
+                        });
+                        </script>
+        <script type="text/javascript">
+                setInterval(function() {
+                                $.ajax({
+                                        url: "/index.php/game/mafia_chat",
+                                        async: false,
+                                        type: "POST",
+                                        data: "type=chat",
+                                        dataType: "html",
+                                        success: function(data) {
+                                                $('#mafia-chat-input').html(data);
+                                        }
+                                })
+                        }, 1000);
+        </script>
+                </div>
+		<?php
+		}
+		?>
 	</div>
 
 </section>
