@@ -86,8 +86,17 @@ class Game extends CI_Controller {
 		$form_data = array ( 'game.id'=> $game_id );
 		$data['game_info'] = $this->game_model->game_details($form_data);
 
-		$mafia_count = 2;
 		$current_count = 0;
+
+		foreach ($data['game_info'] as $player)
+                {
+			if($player->role == 1)
+			{
+				$current_count++;				
+			}
+		}
+
+		$mafia_count = 2;
 
 		foreach ($data['game_info'] as $player)
 		{
@@ -256,6 +265,12 @@ class Game extends CI_Controller {
 		$data['game_state'] = array('state' => $current_state[0]->state_id);
 
 		switch($current_state[0]->state_id) {
+			case 1:
+				$data['game_state'] = array( 'state' => 'startup.png');
+				break;
+			case 2:
+				$data['game_state'] = array( 'state' => 'waiting.png');
+				break;
 			case 3:
 				$data['game_state'] = array( 'state' => 'daytime.png');
 				break;

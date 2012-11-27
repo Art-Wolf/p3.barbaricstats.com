@@ -10,7 +10,7 @@ $mafia_ind = FALSE;
 
 	<div class="row">
 		<div class="span11" id="game-state">
-			<img src="/img/nighttime.png" width="600px">
+			<img src="/img/startup.png" width="600px">
 		</div>
 
 		<div class="span11" id="players">
@@ -102,7 +102,7 @@ $mafia_ind = FALSE;
                                                 $('#game-state').html(data);
                                         }
                                 })
-                        }, 1000);
+                        }, 5000);
         </script>
 		</div>
 
