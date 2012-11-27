@@ -76,7 +76,7 @@
       <p class="lead">An old soviet game to stimulate strategic thinking.</p>
     </div>
     <div class="span6">
-        <img src="/img/test.gif" />
+        <img src="/img/mafia.png" />
     </div>
   </div>
 </header>
