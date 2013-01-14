@@ -75,6 +75,17 @@ class Game_model extends CI_Model
 
 			if ($this->db->affected_rows() == '0')
                 	{
+				$this->db->select('COUNT(*)');
+				$this->db->from('game');
+				$this->where('game.id = ' . $data['game.id']);
+
+				$results = $this->db->get()->result();
+
+				if(count($result) >= 7)
+				{
+					return false;
+				}
+
                         	$this->db->insert('game', $data);
                 	}
  		}
@@ -82,6 +93,8 @@ class Game_model extends CI_Model
                 {
 			$this->db->insert('game', $data);
                 }
+
+		return true;
 	}
 
 	function get_latest_game($data)

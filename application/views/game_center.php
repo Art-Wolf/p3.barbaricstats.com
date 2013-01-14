@@ -101,7 +101,8 @@ $mafia_ind = FALSE;
                                         success: function(data) {
                                                 $('#game-state').html(data);
                                         }
-                                })
+                                });
+				return false;
                         }, 5000);
         </script>
 		</div>

@@ -275,10 +275,10 @@ class Game extends CI_Controller {
 				$data['game_state'] = array( 'state' => 'daytime.png');
 				break;
 			case 4:
-				$data['game_state'] = array( 'state' => 'nighttime.png');
+				$data['game_state'] = array( 'state' => 'lynch.png');
                                 break;
 			case 5:
-				$data['game_state'] = array( 'state' => 'lynch.png');
+				$data['game_state'] = array( 'state' => 'nighttime.png');
                                 break;
 			case 6:
 				$data['game_state'] = array( 'state' => 'mafiahit.png');
